@@ -16,7 +16,7 @@ COPY index.html ./
 
 # Build
 RUN CGO_ENABLED=0 GOOS=linux go mod tidy
-RUN CGO_ENABLED=0 GOOS=linux go build -o /go-cicd
+RUN CGO_ENABLED=0 GOOS=linux go build -o /go-simple
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
