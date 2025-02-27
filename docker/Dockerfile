@@ -6,13 +6,13 @@ FROM golang:1.24-alpine
 WORKDIR /app
 
 # Download Go modules
-COPY go.mod ./
+COPY ../go.mod ./
 RUN go mod download
 
 # Copy the source code. Note the slash at the end, as explained in
 # https://docs.docker.com/engine/reference/builder/#copy
 COPY *.go ./
-COPY index.html ./
+COPY ../index.html ./
 
 # Build
 RUN CGO_ENABLED=0 GOOS=linux go mod tidy
