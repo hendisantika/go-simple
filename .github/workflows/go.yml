@@ -8,9 +8,10 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+env:
+  IMAGE_TAG: ${{ github.run_number }}
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -26,3 +27,18 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+  docker:
+    depends-on: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login Dockerhub
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_TOKEN}}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
+      - name: Build the Docker image
+        run: docker build -t hendisantika/go-simple .
+      - name: Push to Dockerhub
+        run: docker push hendisantika/go-simple:${{ github.run_number }}
+
