@@ -22,7 +22,7 @@ func Greeting(w http.ResponseWriter, r *http.Request) {
 	} else {
 		name = strings.Title(name)
 	}
-	var filepath = path.Join("", "index.html")
+	var filepath = path.Join("", "index2.html")
 	var tmpl, err = template.ParseFiles(filepath)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
