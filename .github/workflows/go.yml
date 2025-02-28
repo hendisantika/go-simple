@@ -16,6 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+      with:
+        path: ~/.cache
+        key: ${{ runner.os }}-mycache-${{ github.run_id }}
+        restore-keys: |
+          ${{ runner.os }}-go-simple
 
     - name: Set up Go
       uses: actions/setup-go@v4
